@@ -6,6 +6,11 @@ import sys
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'src.settings')
+
+    if os.environ.get('RUN_MAIN') == 'true':
+        import ptvsd
+        ptvsd.enable_attach( address = ('0.0.0.0', 3005))
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
