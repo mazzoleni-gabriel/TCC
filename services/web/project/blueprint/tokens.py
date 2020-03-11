@@ -12,10 +12,10 @@ def list_all():
     result = repository.list_all()
     return schema.jsonify(result), 200
 
-@bp_tokens.route('/token/<id>', methods=['GET'])
-def get(id):
+@bp_tokens.route('/token/<_id>', methods=['GET'])
+def get(_id):
     schema = TokenSchema()
-    result = repository.get_by_id(id)
+    result = repository.get_by_id(_id)
     return schema.jsonify(result), 200
 
 @bp_tokens.route('/token/available', methods=['GET'])
@@ -33,15 +33,15 @@ def save():
 
     return schema.jsonify(result), 201
 
-@bp_tokens.route('/token/<id>', methods=['PUT'])
-def update(id):
+@bp_tokens.route('/token/<_id>', methods=['PUT'])
+def update(_id):
     schema = TokenSchema()
-    result  = repository.update(id, request.json)
+    result  = repository.update(_id, request.json)
 
     return schema.jsonify(result), 200
 
-@bp_tokens.route('/token/<id>', methods=['DELETE'])
-def delete(id):
-    repository.delete(id)
+@bp_tokens.route('/token/<_id>', methods=['DELETE'])
+def delete(_id):
+    repository.delete(_id)
 
     return '', 200

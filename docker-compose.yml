@@ -3,7 +3,7 @@ version: '3.7'
 services:
   web:
     build: ./services/web
-    command: python -m ptvsd --host 0.0.0.0 --port 5678 --wait --multiprocess manage.py run --no-debugger --no-reload -h 0.0.0.0
+    command: python -m ptvsd --host 0.0.0.0 --port 5678 --multiprocess manage.py run --no-debugger --no-reload -h 0.0.0.0
     #command: python -m ptvsd --host 0.0.0.0 --port 5678 --wait --multiprocess -m flask run --no-debugger --no-reload
     volumes:
       - ./services/web/:/usr/src/app/

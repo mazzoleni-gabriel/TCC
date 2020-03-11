@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from time import sleep
 
 #TODO validate timezone
-#returns an available token, if there isn't, sleep... 
+#returns an available token, if there isn't, sleep...
 def get_available_token():
     most_recent_token = token_repository.get_first_expirated()
     last_expiration = most_recent_token.last_expiration
