@@ -1,8 +1,5 @@
 from flask import current_app
 from ..model import Token
-from .. import model
-
-
 
 
 def list_all():

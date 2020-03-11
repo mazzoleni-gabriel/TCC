@@ -1,5 +1,4 @@
-from flask import Blueprint, current_app, request, jsonify
-from ..model import Token
+from flask import Blueprint, request
 from ..repository import token_repository as repository
 from ..serializer import TokenSchema
 from ..service import reset_token_service
