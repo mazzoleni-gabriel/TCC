@@ -1,5 +1,7 @@
 # TCC
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/46b7f549be2d41e6a717e5e885ce466c)](https://app.codacy.com/manual/mpgabriel95/TCC?utm_source=github.com&utm_medium=referral&utm_content=mpgabriel95/TCC&utm_campaign=Badge_Grade_Dashboard)
+
 To run this project:
 
  - [Install compose](https://docs.docker.com/compose/install/)
