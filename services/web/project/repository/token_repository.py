@@ -24,4 +24,6 @@ def delete(_id):
     current_app.db.session.commit()
 
 def get_first_expirated():
-    return current_app.db.session.query(Token).order_by(Token.last_expiration).first()
+    return current_app.db.session.query(Token).\
+        order_by(Token.last_expiration).\
+        first()
