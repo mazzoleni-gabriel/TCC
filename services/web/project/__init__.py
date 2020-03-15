@@ -10,8 +10,10 @@ def create_app():
     config_db(app)
     config_ma(app)
 
-    from .blueprint.tokens import bp_tokens
-    app.register_blueprint(bp_tokens)
+    from .blueprint.token_blueprint import bp_token
+    from .blueprint.github_user_blueprint import bp_github_user
+    app.register_blueprint(bp_token)
+    app.register_blueprint(bp_github_user)
 
     return app
 
