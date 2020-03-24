@@ -1,10 +1,10 @@
 from . import github_instance_service
 from ..model import Github_user
 
-def get_user(user_name):
+def get_user(user_login):
     g = github_instance_service.get_available_instance()
     #TODO return None when 404
-    namedUser = g.get_user(user_name)
+    namedUser = g.get_user(user_login)
     github_user = from_namedUser_to_user(namedUser)
     return github_user
 
