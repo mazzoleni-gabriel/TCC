@@ -12,10 +12,10 @@ def list_all():
     result = repository.list_all()
     return schema.jsonify(result), 200
 
-@bp_github_repository.route('/github-repository/<id>', methods=['GET'])
-def get(id):
+@bp_github_repository.route('/github-repository/<_id>', methods=['GET'])
+def get(_id):
     schema = GithubRepositorySchema()
-    result = repository.get_by_id(id)
+    result = repository.get_by_id(_id)
     return schema.jsonify(result), 200
 
 @bp_github_repository.route('/github-repository/user/<login>', methods=['POST'])
