@@ -1,5 +1,5 @@
 from flask import Blueprint
-from ..service import github_extractor_service
+from ..service import github_extractor_service as service
 from ..repository import github_user_repository as repository
 from ..serializer import GithubUserSchema
 
@@ -21,5 +21,5 @@ def get(login):
 @bp_github_user.route('/github-user/<login>', methods=['POST'])
 def save(login):
     schema = GithubUserSchema()
-    github_user = github_extractor_service.get_user(login)
+    github_user = service.get_user(login)
     return schema.jsonify(repository.save(github_user)), 200

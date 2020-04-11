@@ -1,5 +1,5 @@
 from flask_marshmallow import Marshmallow
-from .model import Token, Github_user
+from .model import Token, Github_user, Github_repository
 
 ma = Marshmallow()
 
@@ -13,3 +13,7 @@ class TokenSchema(ma.ModelSchema):
 class GithubUserSchema(ma.ModelSchema):
     class Meta:
         model = Github_user
+
+class GithubRepositorySchema(ma.ModelSchema):
+    class Meta:
+        model = Github_repository

@@ -24,5 +24,17 @@ class Github_user(db.Model):
     location = db.Column(db.Text)
     bio = db.Column(db.Text)
     email = db.Column(db.Text)
-    hireable = db.Column(db.Boolean) #
+    hireable = db.Column(db.Boolean)
     github_created_at = db.Column(db.DateTime)
+    repositories = db.relationship('Github_repository', backref='github_user', lazy=True)
+
+class Github_repository(db.Model):
+    __tablename__ = "github_repository"
+    github_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    full_name = db.Column(db.Text)
+    language = db.Column(db.Text)
+    is_fork = db.Column(db.Boolean)
+    github_created_at = db.Column(db.DateTime)
+    owner_id = db.Column(db.Integer, db.ForeignKey('github_user.github_id'))
+    #Parent
