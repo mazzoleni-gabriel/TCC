@@ -13,10 +13,11 @@ def create_app():
     from .blueprint.token_blueprint import bp_token
     from .blueprint.github_user_blueprint import bp_github_user
     from .blueprint.github_repository_blueprint import bp_github_repository
+    from .blueprint.github_pull_request_blueprint import bp_github_pull_request
     app.register_blueprint(bp_token)
     app.register_blueprint(bp_github_user)
     app.register_blueprint(bp_github_repository)
-
+    app.register_blueprint(bp_github_pull_request)
     return app
 
 app = create_app()

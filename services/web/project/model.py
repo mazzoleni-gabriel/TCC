@@ -36,5 +36,19 @@ class Github_repository(db.Model):
     language = db.Column(db.Text)
     is_fork = db.Column(db.Boolean)
     github_created_at = db.Column(db.DateTime)
-    owner_id = db.Column(db.Integer, db.ForeignKey('github_user.github_id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('github_user.github_id')) # TODO remove this
     #Parent
+
+class Github_pull_request(db.Model):
+    __tablename__ = "github_pull_request"
+    github_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text)
+    state = db.Column(db.Text)
+    additions = db.Column(db.Integer)
+    deletions = db.Column(db.Integer)
+    github_created_at = db.Column(db.DateTime)
+    github_closed_at = db.Column(db.DateTime)
+    is_merged = db.Column(db.Boolean)
+    github_merged_at = db.Column(db.DateTime)
+    repository_id = db.Column(db.Integer, db.ForeignKey('github_repository.github_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('github_user.github_id'))
