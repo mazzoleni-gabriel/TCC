@@ -1,8 +1,5 @@
 from flask import Blueprint
 from ..service import github_pull_request_extrator_service as service
-from ..repository import github_pull_request_repository as repository
-from ..serializer import GithubPullRequestSchema
-
 
 bp_github_pull_request = Blueprint('github_pull_request', __name__)
 
