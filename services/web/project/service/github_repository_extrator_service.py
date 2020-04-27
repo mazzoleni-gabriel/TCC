@@ -18,5 +18,4 @@ def from_pygithub_object(pygithub_repo):
     github_repository.is_fork = pygithub_repo.fork
     github_repository.language = pygithub_repo.language
     github_repository.github_created_at = pygithub_repo._created_at.value
-    github_repository.owner_id = pygithub_repo.owner.id
     return github_repository

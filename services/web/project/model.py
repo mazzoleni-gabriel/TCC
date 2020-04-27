@@ -26,7 +26,6 @@ class Github_user(db.Model):
     email = db.Column(db.Text)
     hireable = db.Column(db.Boolean)
     github_created_at = db.Column(db.DateTime)
-    repositories = db.relationship('Github_repository', backref='github_user', lazy=True)
 
 class Github_repository(db.Model):
     __tablename__ = "github_repository"
@@ -36,8 +35,6 @@ class Github_repository(db.Model):
     language = db.Column(db.Text)
     is_fork = db.Column(db.Boolean)
     github_created_at = db.Column(db.DateTime)
-    owner_id = db.Column(db.Integer, db.ForeignKey('github_user.github_id')) # TODO remove this
-    #Parent
 
 class Github_pull_request(db.Model):
     __tablename__ = "github_pull_request"
