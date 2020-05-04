@@ -1,5 +1,5 @@
 from flask import Blueprint
-from ..service import github_extractor_service as service
+from ..service import github_user_service as service
 from ..repository import github_user_repository as repository
 from ..serializer import GithubUserSchema
 
