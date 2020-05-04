@@ -4,11 +4,14 @@ from ..model import Github_repository
 
 
 def save_repos_by_user(user_login):
-    g = instance_service.get_available_instance()
-    namedUser = g.get_user(user_login)
-    for pygithub_repo in namedUser.get_repos():
+    for pygithub_repo in get_repos(user_login):
         github_repository = from_pygithub_object(pygithub_repo)
         github_repository_repository.save(github_repository)
+
+def get_repos(user_login):
+    g = instance_service.get_available_instance()
+    namedUser = g.get_user(user_login)
+    return namedUser.get_repos()
 
 def from_pygithub_object(pygithub_repo):
     github_repository = Github_repository()
