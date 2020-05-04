@@ -1,5 +1,3 @@
-from github import Github
-from . import github_repository_extrator_service as repo_service
 from . import github_pull_request_extrator_service as pulls_service
 from ..repository import github_repository_repository as repo_repository
 
@@ -20,5 +18,3 @@ def extract_users(user_name):
 def save_pulls_from_issues(pull_issues):
     for issue in pull_issues:
         pulls_service.save_from_issue(issue)
-
-

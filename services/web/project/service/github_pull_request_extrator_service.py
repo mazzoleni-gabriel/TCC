@@ -18,8 +18,7 @@ def save_pulls_by_repo(repo):
         github_pull_request_repository.save(github_pull_request)
 
 def save_from_issue(issue):
-    pull = issue. as_pull_request()
-    repo= issue.repository
+    pull = issue.as_pull_request()
 
     github_pull_request = from_pygithub_object(pull, issue.repository)
 
