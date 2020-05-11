@@ -26,6 +26,7 @@ class Github_user(db.Model):
     email = db.Column(db.Text)
     hireable = db.Column(db.Boolean)
     github_created_at = db.Column(db.DateTime)
+    extracted = db.Column(db.Boolean, default=False)
 
 class Github_repository(db.Model):
     __tablename__ = "github_repository"
