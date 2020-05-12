@@ -9,12 +9,12 @@ def extract(user_name, steps):
     extract_from_user(user_name, current_step, steps)
 
 def extract_from_user(user_name, current_step, steps):
-    extract_pulls(user_name) 
+    extract_pulls(user_name)
     extract_users(user_name)
     user_repository.set_extracted(user_name)
 
     current_step = current_step + 1
-    if steps >= current_step: 
+    if steps >= current_step:
         extract_next_step(user_name, current_step, steps)
 
 def extract_next_step(user_name, current_step, steps):
