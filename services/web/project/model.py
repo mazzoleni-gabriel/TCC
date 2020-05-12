@@ -50,3 +50,12 @@ class Github_pull_request(db.Model):
     github_merged_at = db.Column(db.DateTime)
     repository_id = db.Column(db.Integer, db.ForeignKey('github_repository.github_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('github_user.github_id'))
+
+class Metrics(db.Model):
+    __tablename__ = "metrics"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id_1 = db.Column(db.Integer, db.ForeignKey('github_user.github_id'))
+    user_id_2 = db.Column(db.Integer, db.ForeignKey('github_user.github_id'))
+    shared_repositories = db.Column(db.Float) # SR
+    shared_contributions = db.Column(db.Float) # JCSR
+    shared_pulls = db.Column(db.Float) # JCORS
