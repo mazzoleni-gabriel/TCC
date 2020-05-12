@@ -1,5 +1,6 @@
 from flask import current_app
 from ..model import Github_user
+from sqlalchemy.sql import text
 
 def list_all():
     return Github_user.query.all()
@@ -28,3 +29,22 @@ def update(github_id, github_user):
     query.update(github_user)
     current_app.db.session.commit()
     return query.first()
+
+def set_extracted(login):
+    session = current_app.db.session
+    user = session.query(Github_user).\
+        filter(Github_user.login == login).\
+        first()
+    user.extracted = True
+    session.commit()
+
+def get_non_extracted_neighbors(user_name):
+    query = text("""select distinct u2.* from github_user u
+            join github_pull_request p on u.github_id = p.user_id
+            join github_repository r on r.github_id = p.repository_id
+            join github_pull_request p2 on r.github_id = p2.repository_id
+            join github_user u2 on u2.github_id = p2.user_id
+            where u2.extracted = false
+            and u.login = :val""")
+    result = current_app.db.session.query(Github_user).from_statement(query).params(val=user_name).all()
+    return result
