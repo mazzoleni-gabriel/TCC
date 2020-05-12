@@ -1,5 +1,4 @@
 from flask import current_app
-from sqlalchemy import update
 from ..model import Github_user
 from sqlalchemy.sql import text
 
