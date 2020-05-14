@@ -2,6 +2,11 @@ from ..repository import token_repository
 from datetime import datetime, timedelta
 from time import sleep
 
+
+def switch_token():
+    set_expired()
+    return get_available_token()
+
 #TODO validate timezone
 #returns an available token, if there isn't, sleep...
 def get_available_token():
@@ -17,6 +22,10 @@ def get_available_token():
         sleep(diference.seconds + 1)
 
     return most_recent_token
+
+def set_expired():
+    most_recent_token = token_repository.get_first_expirated()
+    token_repository.update_last_expiration(most_recent_token.id , datetime.now())
 
 def __is_token_not_ready(last_expiration, now_minus_1):
     return last_expiration > now_minus_1

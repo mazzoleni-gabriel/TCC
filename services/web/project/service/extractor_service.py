@@ -1,6 +1,7 @@
 from . import github_pull_request_extrator_service as pulls_service
 from ..repository import github_repository_repository as repo_repository
 from ..repository import github_user_repository as user_repository
+from . import github_instance_service
 
 
 def extract(user_name, steps):
@@ -37,4 +38,13 @@ def extract_users(user_name):
 def save_pulls_from_issues(pull_issues):
     print("Number of issues: " + str(pull_issues.totalCount))
     for issue in pull_issues:
+        handle_requester(pull_issues)
         pulls_service.save_from_issue(issue)
+
+def handle_requester(issues):
+    current_requester = issues._PaginatedList__requester
+    rate_limit = current_requester.rate_limiting
+    print("rate limit: " + str(rate_limit))
+    if rate_limit[1] == 5000 and rate_limit[0] <= 300:
+        g = github_instance_service.get_new_instance()
+        issues._PaginatedList__requester =  g._Github__requester

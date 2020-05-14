@@ -14,9 +14,10 @@ def save(token):
     return token
 
 def update(_id, token):
-    query  = Token.query.filter(Token.id == _id)
+    session = current_app.db.session
+    query  = session.query(Token).filter(Token.id == _id)
     query.update(token)
-    current_app.db.session.commit()
+    session.commit()
     return query.first()
 
 def delete(_id):
@@ -27,3 +28,10 @@ def get_first_expirated():
     return current_app.db.session.query(Token).\
         order_by(Token.last_expiration).\
         first()
+
+def update_last_expiration(_id, new_expiration):
+    session = current_app.db.session
+    token  = session.query(Token).filter(Token.id == _id).first()
+    token.last_expiration = new_expiration
+    session.commit()
+    return token
