@@ -42,7 +42,8 @@ def from_pygithub_object(pygithub_pull, pygithub_repo):
 def has_pulls(user_name, repo):
     filters = ['author:' + user_name,
      'repo:' + repo.full_name,
-      'is:pr']
+      'is:pr',
+      'created:=>2019-01-01']
 
     g = instance_service.get_available_instance()
     pulls = g.search_issues(' '.join(filters))
@@ -50,7 +51,9 @@ def has_pulls(user_name, repo):
 
 def get_pulls_by_user_name(user_name):
     filters = ['author:' + user_name,
-      'is:pr']
+        'is:merged',
+        'is:pr',
+        'created:=>2019-01-01']
 
     g = instance_service.get_available_instance()
     pulls = g.search_issues(' '.join(filters))
@@ -58,8 +61,9 @@ def get_pulls_by_user_name(user_name):
 
 def get_pulls_by_repo_full_name(repo_full_name, user_name):
     filters = ['repo:' + repo_full_name,
-        '-author:' + user_name,
-      'is:pr']
+         '-author:' + user_name,
+        'is:merged',
+        'is:pr']
 
     g = instance_service.get_available_instance()
     pulls = g.search_issues(' '.join(filters))
