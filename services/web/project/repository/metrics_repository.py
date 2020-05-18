@@ -1,7 +1,6 @@
 from flask import current_app
 from sqlalchemy.sql import text
 from ..model import Metrics
-from sqlalchemy import and_, or_
 
 def list_all():
     return Metrics.query.all()

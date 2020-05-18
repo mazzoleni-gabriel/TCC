@@ -1,6 +1,5 @@
 from flask import current_app
 from sqlalchemy.sql import text
-from ..model import Metrics
 
 def shared_repos():
     query = text("""select u1.github_id as user_id_1,

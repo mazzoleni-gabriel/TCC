@@ -1,6 +1,5 @@
 from ..repository import metrics_calculation_repository, metrics_repository
 from ..model import Metrics
-from multiprocessing import Pool
 
 
 def calculate_shared_repos():
@@ -8,7 +7,7 @@ def calculate_shared_repos():
      __save_all(query_result)
 
 def __save_all(query_result): # TODO fazer insert em lote (bulk)
-    [__save(r) for r in query_result]
+    for r in query_result: __save(r)
 
 def __save(query_single_result):
     metrics_repository.save(__to_metric(query_single_result))
