@@ -43,7 +43,7 @@ def has_pulls(user_name, repo):
     filters = ['author:' + user_name,
      'repo:' + repo.full_name,
       'is:pr',
-      'created:=>2019-01-01']
+      'created:=>2020-01-01']
 
     g = instance_service.get_available_instance()
     pulls = g.search_issues(' '.join(filters))
@@ -53,7 +53,7 @@ def get_pulls_by_user_name(user_name):
     filters = ['author:' + user_name,
         'is:merged',
         'is:pr',
-        'created:=>2019-01-01']
+        'created:=>2020-01-01']
 
     g = instance_service.get_available_instance()
     pulls = g.search_issues(' '.join(filters))

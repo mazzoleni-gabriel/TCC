@@ -48,14 +48,3 @@ def get_non_extracted_neighbors(user_name):
             and u.login = :val""")
     result = current_app.db.session.query(Github_user).from_statement(query).params(val=user_name).all()
     return result
-
-
-def shared_repos(user_name):
-    query = text("""select u1.github_id, u2.github_id, count(distinct r.github_id) from github_user u1
-            join github_pull_request p on u1.github_id = p.user_id
-            join github_repository r on r.github_id = p.repository_id
-            join github_pull_request p2 on r.github_id = p2.repository_id
-            join github_user u2 on u2.github_id = p2.user_id group by u1.github_id, u2.github_id
-            having u1.github_id <> u2.github_id""")
-    result = current_app.db.session.query(Github_user).from_statement(query).params(val=user_name).all()
-    return result
