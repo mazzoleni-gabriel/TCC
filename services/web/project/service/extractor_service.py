@@ -30,7 +30,7 @@ def extract_pulls(user_name):
 def extract_users(user_name):
     repos = repo_repository.get_repos_by_user(user_name)
     print("Extracting pulls from " + str( len( repos ) ) + " repos")
-    for r in repos:
+    for r in repos: ## TODO extract only non extracted repos
         print('Extracting pulls from repo ' + r.full_name)
         pull_issues = pulls_service.get_pulls_by_repo_full_name(r.full_name, user_name)
         save_pulls_from_issues(pull_issues)
