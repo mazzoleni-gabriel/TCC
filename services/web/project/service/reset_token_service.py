@@ -4,6 +4,7 @@ from time import sleep
 
 
 def switch_token():
+    print("Switching token...")
     set_expired()
     return get_available_token()
 

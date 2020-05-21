@@ -19,8 +19,9 @@ def get_by_users_ids(user_id1, user_id2):
 def save(metric):
     found_metric = get_by_users_ids(metric.user_id_1, metric.user_id_2)
     if found_metric is not None:
-        print("Metric already exists for users " + metric.user_id_1 + " and " + metric.user_id_1)
+        print("Metric already exists for users " + str(metric.user_id_1) + " and " + str(metric.user_id_2))
         return found_metric
     current_app.db.session.add(metric)
     current_app.db.session.commit()
     return metric
+

@@ -6,3 +6,5 @@ marshmallow-sqlalchemy==0.22.3
 Flask-Migrate==2.5.2
 PyGithub
 ptvsd == 4.3.2
+networkx == 2.4
+matplotlib == 3.2.1 
