@@ -25,3 +25,33 @@ def save(metric):
     current_app.db.session.commit()
     return metric
 
+def update_adamic(user_id1, user_id2, adamic):
+    query = text("""select * from metrics where
+        (user_id_1 = :user1 and user_id_2 = :user2)
+        or (user_id_1 = :user2 and user_id_2 = :user1)
+        limit 1 """)
+    session = current_app.db.session
+    metric = current_app.db.session.query(Metrics).from_statement(query).params(user1=user_id1, user2 = user_id2).first()
+    metric.adamic_adar = adamic
+    session.commit()
+
+def update_jaccard(user_id1, user_id2, jaccard):
+    query = text("""select * from metrics where
+        (user_id_1 = :user1 and user_id_2 = :user2)
+        or (user_id_1 = :user2 and user_id_2 = :user1)
+        limit 1 """)
+    session = current_app.db.session
+    metric = current_app.db.session.query(Metrics).from_statement(query).params(user1=user_id1, user2 = user_id2).first()
+    metric.jaccard_coefficient = jaccard
+    session.commit()
+
+def update_resource_allocation(user_id1, user_id2, resource_allocation):
+    query = text("""select * from metrics where
+        (user_id_1 = :user1 and user_id_2 = :user2)
+        or (user_id_1 = :user2 and user_id_2 = :user1)
+        limit 1 """)
+    session = current_app.db.session
+    metric = current_app.db.session.query(Metrics).from_statement(query).params(user1=user_id1, user2 = user_id2).first()
+    metric.resource_allocation = resource_allocation
+    session.commit()
+

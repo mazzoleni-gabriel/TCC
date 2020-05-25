@@ -59,3 +59,6 @@ class Metrics(db.Model):
     shared_repositories = db.Column(db.Float) # SR
     shared_contributions = db.Column(db.Float) # JCSR
     shared_pulls = db.Column(db.Float) # JCORS
+    adamic_adar = db.Column(db.Float)
+    resource_allocation = db.Column(db.Float)
+    jaccard_coefficient = db.Column(db.Float)
