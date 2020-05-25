@@ -1,5 +1,4 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 from ..repository import metrics_repository, github_user_repository
 
 
@@ -12,7 +11,7 @@ def load_graph(login):
 
     to_predict = __nodes_to_predict(graph.nodes, main_user.github_id)
 
-    # calculate_and_save_adamic(graph, to_predict)
+    calculate_and_save_adamic(graph, to_predict)
     calculate_and_save_jaccard(graph, to_predict)
     calculate_and_save_resource_allocation(graph, to_predict)
 
