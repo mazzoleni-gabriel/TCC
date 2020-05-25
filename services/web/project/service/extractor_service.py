@@ -44,7 +44,6 @@ def save_pulls_from_issues(pull_issues):
 def handle_requester(issues):
     current_requester = issues._PaginatedList__requester
     rate_limit = current_requester.rate_limiting
-    print("rate limit: " + str(rate_limit))
     if rate_limit[1] == 5000 and rate_limit[0] <= 300:
         g = github_instance_service.get_new_instance()
         issues._PaginatedList__requester =  g._Github__requester
