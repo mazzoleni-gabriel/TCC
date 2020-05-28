@@ -17,3 +17,8 @@ def init_graph(login):
 def calculate_shared_contributions(login):
     semantic_metrics_service.save_shared_contributions(login)
     return '', 200
+
+@bp_metrics.route('/metrics/shared_pulls/<login>', methods=['POST'])
+def calculate_shared_pulls(login):
+    semantic_metrics_service.save_shared_pulls(login)
+    return '', 200
