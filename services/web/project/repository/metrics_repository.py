@@ -65,6 +65,17 @@ def update_shared_contributions(user_id1, user_id2, shared_contributions):
     metric.shared_contributions = shared_contributions
     session.commit()
 
+def update_shared_pulls(user_id1, user_id2, shared_pulls):
+    query = text("""select * from metrics where
+        (user_id_1 = :user1 and user_id_2 = :user2)
+        or (user_id_1 = :user2 and user_id_2 = :user1)
+        limit 1 """)
+    session = current_app.db.session
+    metric = current_app.db.session.query(Metrics).from_statement(query).params(user1=user_id1, user2 = user_id2).first()
+    metric.shared_pulls = shared_pulls
+    session.commit()
+
+
 def get_metrics_with_SR(user_id):
     query = text("""select * from metrics where
         (user_id_1 = :user_id or user_id_2 = :user_id)

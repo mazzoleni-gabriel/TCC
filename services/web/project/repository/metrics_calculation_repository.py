@@ -33,3 +33,17 @@ def count_contributors(repo_id):
                     where r.github_id = :repo_id""")
     result = current_app.db.engine.execute(query, repo_id=repo_id).first()
     return result.repos_count
+
+def count_pulls_by_user_in_repo(repo_id, user_id):
+    query = text("""select count(1) as pulls_count
+                    from github_pull_request p
+                    where p.repository_id = :repo_id and p.user_id = :user_id""")
+    result = current_app.db.engine.execute(query, repo_id=repo_id, user_id=user_id).first()
+    return result.pulls_count
+
+def count_pulls_in_repo(repo_id):
+    query = text("""select count(1) as pulls_count
+                    from github_pull_request p
+                    where p.repository_id = :repo_id""")
+    result = current_app.db.engine.execute(query, repo_id=repo_id).first()
+    return result.pulls_count

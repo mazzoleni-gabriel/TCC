@@ -11,6 +11,27 @@ def save_shared_contributions(login):
         shared_contributions = process_shared_contributions(main_user_id, u)
         metrics_repository.update_shared_contributions(main_user_id, u, shared_contributions)
 
+def save_shared_pulls(login):
+    main_user = github_user_repository.get_by_login(login)
+    main_user_id = main_user.github_id
+    initial_metrics = metrics_repository.get_metrics_with_SR(main_user_id)
+    user_ids = from_metrics_to_user_ids(initial_metrics, main_user_id)
+
+    for u in user_ids:
+        shared_pulls = process_shared_pulls(main_user_id, u)
+        metrics_repository.update_shared_pulls(main_user_id, u, shared_pulls)
+
+def process_shared_pulls(user_id_1, user_id_2):
+    shared_contributions = 0.0
+    repo_ids = metrics_calculation_repository.shared_repo_ids_by_users(user_id_1, user_id_2)
+    for r in repo_ids:
+        nc_1 = metrics_calculation_repository.count_pulls_by_user_in_repo(r, user_id_1)
+        nc_2 = metrics_calculation_repository.count_pulls_by_user_in_repo(r, user_id_2)
+        nc_r = metrics_calculation_repository.count_pulls_in_repo(r)
+        value = ( nc_1 + nc_2 )/nc_r
+        shared_contributions = shared_contributions + value
+    return shared_contributions
+
 def process_shared_contributions(user_id_1, user_id_2):
     shared_contributions = 0.0
     repo_ids = metrics_calculation_repository.shared_repo_ids_by_users(user_id_1, user_id_2)
