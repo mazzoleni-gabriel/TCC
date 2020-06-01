@@ -35,8 +35,9 @@ def set_extracted(login):
     user = session.query(Github_user).\
         filter(Github_user.login == login).\
         first()
-    user.extracted = True
-    session.commit()
+    if user is not None:
+        user.extracted = True
+        session.commit()
 
 def get_non_extracted_neighbors(user_name):
     query = text("""select distinct u2.* from github_user u

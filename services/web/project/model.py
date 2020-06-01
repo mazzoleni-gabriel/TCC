@@ -36,6 +36,7 @@ class Github_repository(db.Model):
     language = db.Column(db.Text)
     is_fork = db.Column(db.Boolean)
     github_created_at = db.Column(db.DateTime)
+    extracted = db.Column(db.Boolean, default=False)
 
 class Github_pull_request(db.Model):
     __tablename__ = "github_pull_request"
