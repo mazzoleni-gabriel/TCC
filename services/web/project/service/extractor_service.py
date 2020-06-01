@@ -17,6 +17,7 @@ def extract_from_user(user_name, current_step, steps):
     current_step = current_step + 1
     if steps >= current_step:
         extract_next_step(user_name, current_step, steps)
+    user_repository.set_extracted(user_name)
 
 def extract_next_step(user_name, current_step, steps):
     neighbors = user_repository.get_non_extracted_neighbors(user_name)
@@ -31,9 +32,11 @@ def extract_users(user_name):
     repos = repo_repository.get_repos_by_user(user_name)
     print("Extracting pulls from " + str( len( repos ) ) + " repos")
     for r in repos: ## TODO extract only non extracted repos
-        print('Extracting pulls from repo ' + r.full_name)
-        pull_issues = pulls_service.get_pulls_by_repo_full_name(r.full_name, user_name)
-        save_pulls_from_issues(pull_issues)
+        if( not repo_repository.is_extracted(r.github_id) ):
+            print('Extracting pulls from repo ' + r.full_name)
+            pull_issues = pulls_service.get_pulls_by_repo_full_name(r.full_name, user_name)
+            save_pulls_from_issues(pull_issues)
+            repo_repository.set_extracted(r.github_id)
 
 def save_pulls_from_issues(pull_issues):
     print("Number of issues: " + str(pull_issues.totalCount))

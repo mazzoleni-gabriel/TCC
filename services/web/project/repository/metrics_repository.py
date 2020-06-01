@@ -31,8 +31,16 @@ def update_adamic(user_id1, user_id2, adamic):
         limit 1 """)
     session = current_app.db.session
     metric = current_app.db.session.query(Metrics).from_statement(query).params(user1=user_id1, user2 = user_id2).first()
-    metric.adamic_adar = adamic
-    session.commit()
+    if(metric is not None):
+        metric.adamic_adar = adamic
+        session.commit()
+    else:
+        new_metric = Metrics()
+        new_metric.shared_repositories = 0
+        new_metric.user_id_1 = user_id1
+        new_metric.user_id_2 = user_id2
+        new_metric.adamic_adar = adamic
+        save(new_metric)
 
 def update_jaccard(user_id1, user_id2, jaccard):
     query = text("""select * from metrics where
@@ -41,8 +49,16 @@ def update_jaccard(user_id1, user_id2, jaccard):
         limit 1 """)
     session = current_app.db.session
     metric = current_app.db.session.query(Metrics).from_statement(query).params(user1=user_id1, user2 = user_id2).first()
-    metric.jaccard_coefficient = jaccard
-    session.commit()
+    if(metric is not None):
+        metric.jaccard_coefficient = jaccard
+        session.commit()
+    else:
+        new_metric = Metrics()
+        new_metric.shared_repositories = 0
+        new_metric.user_id_1 = user_id1
+        new_metric.user_id_2 = user_id2
+        new_metric.jaccard_coefficient = jaccard
+        save(new_metric)
 
 def update_resource_allocation(user_id1, user_id2, resource_allocation):
     query = text("""select * from metrics where
@@ -51,8 +67,16 @@ def update_resource_allocation(user_id1, user_id2, resource_allocation):
         limit 1 """)
     session = current_app.db.session
     metric = current_app.db.session.query(Metrics).from_statement(query).params(user1=user_id1, user2 = user_id2).first()
-    metric.resource_allocation = resource_allocation
-    session.commit()
+    if(metric is not None):
+        metric.resource_allocation = resource_allocation
+        session.commit()
+    else:
+        new_metric = Metrics()
+        new_metric.shared_repositories = 0
+        new_metric.user_id_1 = user_id1
+        new_metric.user_id_2 = user_id2
+        new_metric.resource_allocation = resource_allocation
+        save(new_metric)
 
 def update_shared_contributions(user_id1, user_id2, shared_contributions):
     query = text("""select * from metrics where
