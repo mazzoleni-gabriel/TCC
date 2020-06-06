@@ -42,7 +42,7 @@ def calculate_and_save_jaccard(graph, to_predict):
 def __add_in_graph(metric, graph, temp_list):
     m = __metric_to_dic(metric)
     temp_list.append(m)
-    if len(temp_list) >= 1000: #TODO arrumar casos que sobram
+    if len(temp_list) >= 50: #TODO arrumar casos que sobram
         print("Adding to graph")
         graph.add_edges_from(temp_list)
         temp_list.clear()

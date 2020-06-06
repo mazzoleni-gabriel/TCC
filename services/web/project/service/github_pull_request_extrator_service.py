@@ -18,11 +18,15 @@ def save_pulls_by_repo(repo):
         github_pull_request_repository.save(github_pull_request)
 
 def save_from_issue(issue):
-    pull = issue.as_pull_request()
+    try:
+        pull = issue.as_pull_request()
 
-    github_pull_request = from_pygithub_object(pull, issue.repository)
+        github_pull_request = from_pygithub_object(pull, issue.repository)
 
-    github_pull_request_repository.save(github_pull_request)
+        github_pull_request_repository.save(github_pull_request)
+    
+    except:
+        print('Error getting pull request issue')
 
 def from_pygithub_object(pygithub_pull, pygithub_repo):
     github_pull_request = Github_pull_request()
@@ -33,7 +37,6 @@ def from_pygithub_object(pygithub_pull, pygithub_repo):
     github_pull_request.deletions = pygithub_pull.deletions
     github_pull_request.github_created_at = pygithub_pull._created_at.value
     github_pull_request.github_closed_at = pygithub_pull._closed_at.value
-    github_pull_request.is_merged = pygithub_pull.is_merged()
     github_pull_request.github_merged_at = pygithub_pull._merged_at.value
     __set_user(pygithub_pull, github_pull_request)
     __set_repo(pygithub_repo, github_pull_request)
@@ -43,7 +46,7 @@ def has_pulls(user_name, repo):
     filters = ['author:' + user_name,
      'repo:' + repo.full_name,
       'is:pr',
-      'created:=>2020-01-01']
+      'created:=>2000-01-01']
 
     g = instance_service.get_available_instance()
     pulls = g.search_issues(' '.join(filters))
@@ -53,7 +56,7 @@ def get_pulls_by_user_name(user_name):
     filters = ['author:' + user_name,
         'is:merged',
         'is:pr',
-        'created:=>2020-01-01']
+        'created:=>2000-01-01']
 
     g = instance_service.get_available_instance()
     pulls = g.search_issues(' '.join(filters))

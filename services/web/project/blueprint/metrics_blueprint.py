@@ -1,5 +1,5 @@
 from flask import Blueprint
-from ..service import metrics_service, graph_service, semantic_metrics_service
+from ..service import metrics_service, graph_service, semantic_metrics_service, metrics_compilation_service
 import time
 
 bp_metrics = Blueprint('metrics', __name__)
@@ -30,4 +30,11 @@ def calculate_shared_pulls(login):
     start_time = time.time()
     semantic_metrics_service.save_shared_pulls(login)
     print("--- shared_pulls time:  %s seconds ---" % (time.time() - start_time))
+    return '', 200
+
+@bp_metrics.route('/metrics/compile/<login>', methods=['POST'])
+def compile(login):
+    start_time = time.time()
+    metrics_compilation_service.compile(login)
+    print("--- compile metrics time:  %s seconds ---" % (time.time() - start_time))
     return '', 200

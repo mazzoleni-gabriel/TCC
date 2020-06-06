@@ -39,10 +39,13 @@ def extract_users(user_name):
             repo_repository.set_extracted(r.github_id)
 
 def save_pulls_from_issues(pull_issues):
-    print("Number of issues: " + str(pull_issues.totalCount))
-    for issue in pull_issues:
-        handle_requester(pull_issues)
-        pulls_service.save_from_issue(issue)
+    try:
+        print("Number of issues: " + str(pull_issues.totalCount))
+        for issue in pull_issues:
+            handle_requester(pull_issues)
+            pulls_service.save_from_issue(issue)
+    except:
+        print('Error getting pull from issue')
 
 def handle_requester(issues):
     current_requester = issues._PaginatedList__requester

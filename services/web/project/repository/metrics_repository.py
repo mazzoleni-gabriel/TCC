@@ -105,3 +105,51 @@ def get_metrics_with_SR(user_id):
         and shared_repositories > 0 """)
     result = current_app.db.session.query(Metrics).from_statement(query).params(user_id=user_id).all()
     return result
+
+def ordered_by_shared_repositories(user_id, limit):
+    query = text("""select * from metrics where
+        (user_id_1 = :user_id or user_id_2 = :user_id)
+        order by shared_repositories desc nulls last 
+        limit :limit """)
+    result = current_app.db.session.query(Metrics).from_statement(query).params(user_id=user_id, limit=limit).all()
+    return result
+
+def ordered_by_shared_contributions(user_id, limit):
+    query = text("""select * from metrics where
+        (user_id_1 = :user_id or user_id_2 = :user_id)
+        order by shared_contributions desc nulls last 
+        limit :limit """)
+    result = current_app.db.session.query(Metrics).from_statement(query).params(user_id=user_id, limit=limit).all()
+    return result
+
+def ordered_by_shared_pulls(user_id, limit):
+    query = text("""select * from metrics where
+        (user_id_1 = :user_id or user_id_2 = :user_id)
+        order by shared_pulls desc nulls last 
+        limit :limit """)
+    result = current_app.db.session.query(Metrics).from_statement(query).params(user_id=user_id, limit=limit).all()
+    return result
+
+def ordered_by_adamic_adar(user_id, limit):
+    query = text("""select * from metrics where
+        (user_id_1 = :user_id or user_id_2 = :user_id)
+        order by adamic_adar desc nulls last 
+        limit :limit """)
+    result = current_app.db.session.query(Metrics).from_statement(query).params(user_id=user_id, limit=limit).all()
+    return result
+
+def ordered_by_resource_allocation(user_id, limit):
+    query = text("""select * from metrics where
+        (user_id_1 = :user_id or user_id_2 = :user_id)
+        order by resource_allocation desc nulls last 
+        limit :limit """)
+    result = current_app.db.session.query(Metrics).from_statement(query).params(user_id=user_id, limit=limit).all()
+    return result
+
+def ordered_by_jaccard_coefficient(user_id, limit):
+    query = text("""select * from metrics where
+        (user_id_1 = :user_id or user_id_2 = :user_id)
+        order by jaccard_coefficient desc nulls last 
+        limit :limit """)
+    result = current_app.db.session.query(Metrics).from_statement(query).params(user_id=user_id, limit=limit).all()
+    return result
