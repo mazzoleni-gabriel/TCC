@@ -20,4 +20,20 @@ To access local database:
 - `\dt` list tables
 - `\d table_name` describe table
 
-*Project in development*
+To add tokens:
+ - To execute the extraction you need github tokens, the quantity depends on the network size.
+ - `insert into token (token_value, last_expiration) values ('token_value',  now() - INTERVAL '1 DAY');` or run `tokens.sql`
+
+To extract a github network:
+
+ - `curl -i -k -H "Content-Type:application/json" -X POST http://localhost:5000/extract/{user_name}/{steps} -d '{}'`
+
+To extract semantic metrics:
+
+ - `curl -i -k -H "Content-Type:application/json" -X POST http://localhost:5000/metrics/shared-repos -d '{}'`
+ - `curl -i -k -H "Content-Type:application/json" -X POST http://localhost:5000/metrics/shared_pulls/{user_name} -d '{}'`
+ - `curl -i -k -H "Content-Type:application/json" -X POST http://localhost:5000/metrics/shared_contributions/{user_name} -d '{}'`
+
+To extract topological metrics:
+
+ - `curl -i -k -H "Content-Type:application/json" -X POST http://localhost:5000/metrics/topological/epiresdasilva -d '{}'`
