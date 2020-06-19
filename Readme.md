@@ -36,4 +36,4 @@ To extract semantic metrics:
 
 To extract topological metrics:
 
- - `curl -i -k -H "Content-Type:application/json" -X POST http://localhost:5000/metrics/topological/epiresdasilva -d '{}'`
+ - `curl -i -k -H "Content-Type:application/json" -X POST http://localhost:5000/metrics/topological/{user_name} -d '{}'`
